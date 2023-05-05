@@ -1,0 +1,168 @@
+class Album
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ejercicio5
+{
+    class Album
+    {
+        int Id;
+        string Nombre;
+        string FecCreac;
+        List<Fotos> Lista;
+        int totlist;
+
+    
+
+        public Album(int id, string nombre, string fecCreac, List<Fotos> lista, int totlist)
+        {
+            Id1 = id;
+            Nombre1 = nombre;
+            FecCreac1 = fecCreac;
+            Lista1 = lista;
+            Totlist = totlist;
+        }
+
+        public int Id1 { get => Id; set => Id = value; }
+        public string Nombre1 { get => Nombre; set => Nombre = value; }
+        public string FecCreac1 { get => FecCreac; set => FecCreac = value; }
+        public int Totlist { get => totlist; set => totlist = value; }
+        internal List<Fotos> Lista1 { get => Lista; set => Lista = value; }
+
+        public void AnadirF(Fotos F)
+        {
+            try
+            {
+                this.Lista1.Add(F);
+                this.totlist += 1;
+                Console.WriteLine("Se añadio una nueva foto");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("No se pudo añadir: {0}", ex.Message);
+                Console.ReadKey();
+            }
+        }
+        public void MostrarFot()
+        {
+            foreach (var n in this.Lista1)
+            {
+                Console.WriteLine("-----");
+                n.ToString();
+            }
+        }
+        public void VaciarAlbum()
+        {
+            Console.WriteLine("Esta seguro que desea eliminar las fotos??");
+            string resp = Console.ReadLine();
+            if (resp == "si" || resp == "no")
+            {
+                Lista1 = new List<Fotos>();
+                this.totlist = 0;
+                Console.WriteLine("Se ha eliminado todos los elementos");
+            }
+            else
+            {
+                Console.WriteLine("No se elimino, Hay {0} fotos", totlist);
+                Console.ReadKey();
+            }
+        }
+        public void EliminarFto(List<Fotos> f)
+        {
+            
+            if(totlist > 0)
+            {
+                List<Fotos>.re
+                totlist -= 1;
+                Console.WriteLine("Se ha eliminado un registro");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("No hay fotos en el album");
+            }
+          
+        }
+        public void MostrarTamaño ()
+        {
+            int c = 0;
+            foreach (var n in Lista1)
+            {
+                c += n.Tam;
+            }
+            Console.WriteLine("El tamaño total del album es de: {0}",c);
+        }
+
+    }
+}
+
+
+class fotos
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ejercicio5
+{
+    public class Fotos
+    {
+        int id;
+        int tam;
+        string fecha;
+        string coment;
+
+        public Fotos(int id, int tam, string fecha, string coment)
+        {
+            this.Id = id;
+            this.Tam = tam;
+            this.Fecha = fecha;
+            this.Coment = coment;
+        }
+
+        public int Id { get => id; set => id = value; }
+        public int Tam { get => tam; set => tam = value; }
+        public string Fecha { get => fecha; set => fecha = value; }
+        public string Coment { get => coment; set => coment = value; }
+
+        public override string ToString()
+        {
+            return $"Id: {Id},\nTamaño: {Tam}, \nFecha: {Fecha},\nComentario: {Coment}";
+        }
+    }
+
+}
+
+
+program main
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ejercicio5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Album album1 = new Album(1, "mich", "12-3-89", new List<Fotos>(), 0);
+           //album1.AnadirF(new Fotos(1, 2, "12", "Mi esposo"));
+            album1.AnadirF(new Fotos(2, 2, "12", "Mi ex esposo"));
+           
+            album1.EliminarFto();
+      
+            Console.ReadKey();
+        }
+    }
+}
+
